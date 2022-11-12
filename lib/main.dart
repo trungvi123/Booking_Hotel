@@ -5,7 +5,7 @@ import 'package:myshop/ui/products/product_favorite_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'ui/screens.dart';
-
+import 'ui/widgets/form_screen.dart';
 
 Future<void> main() async {
   // (1) Load the .env file
@@ -55,8 +55,8 @@ class MyApp extends StatelessWidget {
                 ).copyWith(
                   secondary: Colors.deepOrange,
                 )),
-            home: 
-            authMananger.isAuth
+            home:  
+              authMananger.isAuth
                 ? const ProductsOverviewScreen()
                 : FutureBuilder(
                     builder: (ctx, snapshot) {
@@ -69,7 +69,8 @@ class MyApp extends StatelessWidget {
               CartScreen.routeName: (ctx) => CartScreen(),
               OrdersScreen.routeName: (ctx) => const OrdersScreen(),
               UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
-              ProductFavoriteScreen.routeName:((ctx) => const ProductFavoriteScreen()),
+              ProductFavoriteScreen.routeName: ((ctx) =>
+                  const ProductFavoriteScreen()),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {
@@ -102,8 +103,8 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
-    
+      
     );
-  
+
   }
 }
