@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:myshop/ui/products/form_screen.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
 
 import 'package:provider/provider.dart';
@@ -21,10 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // (2) Create and provide the AuthManager
+        // Lấy chỉ số trang hiện tại
         ChangeNotifierProvider(
           create: (context) => PageIndexManager(),
         ),
+        
         ChangeNotifierProvider(
           create: (context) => AuthManager(),
         ),
@@ -40,8 +42,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => CartManager(),
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => OrdersManager(),
+        ChangeNotifierProxyProvider<AuthManager, OrderManager>(
+          create: (ctx) => OrderManager(),
+          update: (ctx, authMananger, orderManager) {
+            orderManager!.authToken = authMananger.authToken;
+            return orderManager;
+          },
         ),
       ],
       child: Consumer<AuthManager>(
@@ -67,9 +73,10 @@ class MyApp extends StatelessWidget {
                   ),
             routes: {
               CartScreen.routeName: (ctx) => CartScreen(),
-              OrdersScreen.routeName: (ctx) => const OrdersScreen(),
+              // OrdersScreen.routeName: (ctx) => const OrdersScreen(),
               UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
               ProductFavoriteScreen.routeName:((ctx) => const ProductFavoriteScreen()),
+              FormScreen.routeName:((ctx) => FormScreen()),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

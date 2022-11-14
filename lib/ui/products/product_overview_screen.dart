@@ -138,7 +138,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                           ),
                           child: Text(
                             category[i],
-                            //"Best Places",
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,

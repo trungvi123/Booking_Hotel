@@ -6,6 +6,10 @@ class Product {
   final String description;
   final double price;
   final String imageUrl;
+  final String imageUrl2;
+  final String imageUrl3;
+  final String imageUrl4;
+
   final ValueNotifier<bool> _isFavorite;
 
   Product({
@@ -14,6 +18,10 @@ class Product {
     required this.description,
     required this.price,
     required this.imageUrl,
+    required this.imageUrl2,
+    required this.imageUrl3,
+    required this.imageUrl4,
+
     isFavorite = false,
   }) : _isFavorite = ValueNotifier(isFavorite);
 
@@ -35,6 +43,10 @@ class Product {
     String? description,
     double? price,
     String? imageUrl,
+    String? imageUrl2,
+    String? imageUrl3,
+    String? imageUrl4,
+
     bool? isFavorite,
   }) {
     return Product(
@@ -43,6 +55,10 @@ class Product {
       description: description ?? this.description,
       price: price ?? this.price,
       imageUrl: imageUrl ?? this.imageUrl,
+      imageUrl2: imageUrl2 ?? this.imageUrl2,
+      imageUrl3: imageUrl3 ?? this.imageUrl3,
+      imageUrl4: imageUrl4 ?? this.imageUrl4,
+
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
@@ -53,6 +69,10 @@ class Product {
       'description': description,
       'price': price,
       'imageUrl': imageUrl,
+      'imageUrl2': imageUrl2,
+      'imageUrl3': imageUrl3,
+      'imageUrl4': imageUrl4,
+
     };
   }
 
@@ -63,6 +83,10 @@ class Product {
       description: json['description'],
       price: json['price'],
       imageUrl: json['imageUrl'],
+      imageUrl2: json['imageUrl2'],
+      imageUrl3: json['imageUrl3'],
+      imageUrl4: json['imageUrl4'],
+
     );
   }
 }

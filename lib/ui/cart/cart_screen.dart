@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
 
+import '../products/form_screen.dart';
 import '../widgets/post_app_bar.dart';
 import 'cart_item_card.dart';
 
@@ -68,11 +69,7 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      context.read<OrdersManager>().addOrder(
-                            cart.products,
-                            cart.totalAmount,
-                          );
-                      cart.clear();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => FormScreen(),));
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),

@@ -22,7 +22,7 @@ class ProductDetailScreen extends StatelessWidget {
           image: DecorationImage(
               image: NetworkImage(product.imageUrl),
               fit: BoxFit.cover,
-              opacity: 0.7)),
+              )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
@@ -88,7 +88,7 @@ class ProductDetailScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
-                              image: NetworkImage(product.imageUrl),
+                              image: NetworkImage(product.imageUrl2),
                               fit: BoxFit.cover,
                             )),
                       )),
@@ -101,7 +101,7 @@ class ProductDetailScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
-                              image: NetworkImage(product.imageUrl),
+                              image: NetworkImage(product.imageUrl3),
                               fit: BoxFit.cover,
                             )),
                       )),
@@ -114,8 +114,8 @@ class ProductDetailScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                                image: AssetImage("images/city6.jpg"),
+                            image: DecorationImage(
+                                image: NetworkImage(product.imageUrl4),
                                 fit: BoxFit.cover,
                                 opacity: 0.4)),
                         child: const Text(

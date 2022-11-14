@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import '../models/product.dart';
@@ -10,9 +9,9 @@ import 'firebase_service.dart';
 class ProductsService extends FirebaseService {
   ProductsService([AuthToken? authToken]) : super(authToken);
 
+
   Future<List<Product>> fetchProducts([bool filterByUser = false]) async {
     final List<Product> products = [];
-
     try {
       final filters =
           filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
@@ -61,7 +60,6 @@ class ProductsService extends FirebaseService {
             }),
         ),
       );
-
       if (response.statusCode != 200) {
         throw Exception(json.decode(response.body)['error']);
       }

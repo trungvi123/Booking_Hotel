@@ -19,6 +19,7 @@ class AuthManager with ChangeNotifier {
     return _authToken;
   }
 
+
   void _setAuthToken(AuthToken token) {
     _authToken = token;
     _autoLogout();
@@ -61,4 +62,8 @@ class AuthManager with ChangeNotifier {
         _authToken!.expiryDate.difference(DateTime.now()).inSeconds;
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
+
+
+  
+
 }

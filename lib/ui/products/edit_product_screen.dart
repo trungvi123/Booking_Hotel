@@ -19,6 +19,9 @@ class EditProductScreen extends StatefulWidget {
         description: '',
         price: 0,
         imageUrl: '',
+        imageUrl2: '',
+        imageUrl3: '',
+        imageUrl4: '',
       );
     } else {
       this.product = product;
@@ -33,7 +36,15 @@ class EditProductScreen extends StatefulWidget {
 
 class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlController = TextEditingController();
+  final _imageUrlController2 = TextEditingController();
+  final _imageUrlController3 = TextEditingController();
+  final _imageUrlController4 = TextEditingController();
+
   final _imageUrlFocusNode = FocusNode();
+  final _imageUrlFocusNode2 = FocusNode();
+  final _imageUrlFocusNode3 = FocusNode();
+  final _imageUrlFocusNode4 = FocusNode();
+
   final _editForm = GlobalKey<FormState>();
   late Product _editedProduct;
   var _isLoading = false;
@@ -56,15 +67,55 @@ class _EditProductScreenState extends State<EditProductScreen> {
         setState(() {});
       }
     });
+    _imageUrlFocusNode2.addListener(() {
+      if (!_imageUrlFocusNode2.hasFocus) {
+        if (!_isValidImageUrl(_imageUrlController2.text)) {
+          return;
+        }
+        // Ảnh hợp lệ -> Vẽ lại màn hình để hiện preview
+        setState(() {});
+      }
+    });
+
+    _imageUrlFocusNode3.addListener(() {
+      if (!_imageUrlFocusNode3.hasFocus) {
+        if (!_isValidImageUrl(_imageUrlController3.text)) {
+          return;
+        }
+        // Ảnh hợp lệ -> Vẽ lại màn hình để hiện preview
+        setState(() {});
+      }
+    });
+
+    _imageUrlFocusNode4.addListener(() {
+      if (!_imageUrlFocusNode4.hasFocus) {
+        if (!_isValidImageUrl(_imageUrlController4.text)) {
+          return;
+        }
+        // Ảnh hợp lệ -> Vẽ lại màn hình để hiện preview
+        setState(() {});
+      }
+    });
+
     _editedProduct = widget.product;
     _imageUrlController.text = _editedProduct.imageUrl;
+    _imageUrlController2.text = _editedProduct.imageUrl2;
+    _imageUrlController3.text = _editedProduct.imageUrl3;
+    _imageUrlController4.text = _editedProduct.imageUrl4;
     super.initState();
   }
 
   @override
   void dispose() {
     _imageUrlController.dispose();
+    _imageUrlController2.dispose();
+    _imageUrlController3.dispose();
+    _imageUrlController4.dispose();
     _imageUrlFocusNode.dispose();
+    _imageUrlFocusNode2.dispose();
+    _imageUrlFocusNode3.dispose();
+    _imageUrlFocusNode4.dispose();
+
     super.dispose();
   }
 
@@ -124,7 +175,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     buildTitleField(),
                     buildPriceField(),
                     buildDescriptionField(),
-                    buildProductPreview(),
+                    buildProductPreview(1),
+                    buildProductPreview(2),
+                    buildProductPreview(3),
+                    buildProductPreview(4),
                   ],
                 ),
               ),
@@ -195,7 +249,23 @@ class _EditProductScreenState extends State<EditProductScreen> {
     );
   }
 
-  Widget buildProductPreview() {
+  Widget buildProductPreview(int number) {
+    final _imageUrlControllerText;
+    final _imageUrlControllerTextIsEmpty;
+    if (number == 1) {
+      _imageUrlControllerText = _imageUrlController.text;
+      _imageUrlControllerTextIsEmpty = _imageUrlController.text.isEmpty;
+    } else if (number == 2) {
+      _imageUrlControllerText = _imageUrlController2.text;
+      _imageUrlControllerTextIsEmpty = _imageUrlController2.text.isEmpty;
+    } else if (number == 3) {
+      _imageUrlControllerText = _imageUrlController3.text;
+      _imageUrlControllerTextIsEmpty = _imageUrlController3.text.isEmpty;
+    } else {
+      _imageUrlControllerText = _imageUrlController4.text;
+      _imageUrlControllerTextIsEmpty = _imageUrlController4.text.isEmpty;
+    }
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
@@ -212,29 +282,45 @@ class _EditProductScreenState extends State<EditProductScreen> {
               color: Colors.grey,
             ),
           ),
-          child: _imageUrlController.text.isEmpty
+          child: _imageUrlControllerTextIsEmpty
               ? const Text('Enter a URL')
               : FittedBox(
                   child: Image.network(
-                    _imageUrlController.text,
+                    _imageUrlControllerText,
                     fit: BoxFit.cover,
                   ),
                 ),
         ),
         Expanded(
-          child: buildImageUrlField(),
+          child: buildImageUrlField(number),
         ),
       ],
     );
   }
 
-  TextFormField buildImageUrlField() {
+  TextFormField buildImageUrlField(int number) {
+    final imageUrlFocusNode;
+    final imageUrlController;
+    if (number == 1) {
+      imageUrlFocusNode = _imageUrlFocusNode;
+      imageUrlController = _imageUrlController;
+    } else if (number == 2) {
+      imageUrlFocusNode = _imageUrlFocusNode2;
+      imageUrlController = _imageUrlController2;
+    } else if (number == 3) {
+      imageUrlFocusNode = _imageUrlFocusNode3;
+      imageUrlController = _imageUrlController3;
+    } else {
+      imageUrlFocusNode = _imageUrlFocusNode4;
+      imageUrlController = _imageUrlController4;
+    }
+
     return TextFormField(
       decoration: const InputDecoration(labelText: 'Image URL'),
       keyboardType: TextInputType.url,
       textInputAction: TextInputAction.done,
-      controller: _imageUrlController,
-      focusNode: _imageUrlFocusNode,
+      controller: imageUrlController,
+      focusNode: imageUrlFocusNode,
       onFieldSubmitted: (value) => _saveForm(),
       validator: (value) {
         if (value!.isEmpty) {
@@ -246,7 +332,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(imageUrl: value);
+        if (number == 1) {
+          _editedProduct = _editedProduct.copyWith(imageUrl: value);
+        } else if (number == 2) {
+          _editedProduct = _editedProduct.copyWith(imageUrl2: value);
+        } else if (number == 3) {
+          _editedProduct = _editedProduct.copyWith(imageUrl3: value);
+        } else {
+          _editedProduct = _editedProduct.copyWith(imageUrl4: value);
+        }
       },
     );
   }

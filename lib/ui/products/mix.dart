@@ -1,6 +1,3 @@
-
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 
 class PageIndexManager extends ChangeNotifier {
@@ -14,5 +11,7 @@ class PageIndexManager extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
 
 

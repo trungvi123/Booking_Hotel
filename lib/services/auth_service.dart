@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../models/http_exception.dart';
 import '../models/auth_token.dart';
 
-class AuthService {
+class AuthService{
   static const _authTokenKey = 'authToken';
   late final String? _apiKey;
 
@@ -95,4 +95,8 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(_authTokenKey);
   }
+
+
+ 
+
 }

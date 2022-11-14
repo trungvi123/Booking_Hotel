@@ -17,15 +17,39 @@ class ProductsGrid extends StatelessWidget {
         (productsManager) => showFavorites
             ? productsManager.favoriteItems
             : productsManager.items);
-    return GridView.builder(
-      
-      padding: const EdgeInsets.all(10.0),
-      itemCount: products.length,
-      itemBuilder: (ctx, i) => ProductGridTile(products[i]),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        mainAxisSpacing: 20
-      ),
-    );
+    if (products.isEmpty) {
+      return Column(
+        children: [
+          Container(
+            height: 500,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        'https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2021/8/9/photo1628498917276-1628498917376817005725.jpg'),
+                    fit: BoxFit.fitWidth)),
+            child: Container(
+              child: Center(
+                child: Text(
+                  'Chưa thích sản phẩm nào mà dám dô đây coi hạ???',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return GridView.builder(
+        padding: const EdgeInsets.all(10.0),
+        itemCount: products.length,
+        itemBuilder: (ctx, i) => ProductGridTile(products[i]),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1, mainAxisSpacing: 20),
+      );
+    }
   }
 }

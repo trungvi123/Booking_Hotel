@@ -1,16 +1,17 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:myshop/ui/products/page_index_manager.dart';
+import 'package:myshop/ui/auth/auth_manager.dart';
+import 'package:myshop/ui/products/edit_product_screen.dart';
+import 'package:myshop/ui/products/mix.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
-import 'package:myshop/ui/products/product_overview_screen.dart';
 import 'package:provider/provider.dart';
-
 import '../cart/cart_screen.dart';
 
 class HomeBottomBar extends StatelessWidget {
   HomeBottomBar({super.key});
   @override
   Widget build(BuildContext context) {
+    final userId = context.watch<AuthManager>().authToken!.userId;
     return CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         index: context.watch<PageIndexManager>().pageindex,
@@ -26,13 +27,18 @@ class HomeBottomBar extends StatelessWidget {
                   Navigator.of(context)
                       .pushNamed(ProductFavoriteScreen.routeName)
                 }
-              else
+              else if (value == 2)
                 {
                   context.read<PageIndexManager>().add(2),
                   Navigator.of(context).pushNamed(CartScreen.routeName)
-                },
+                }
+              else
+                {
+                  context.read<PageIndexManager>().add(3),
+                  Navigator.of(context).pushNamed(EditProductScreen.routeName)
+                }
             },
-        items: const [
+        items: [
           Icon(
             Icons.favorite_outline,
             size: 30,
@@ -45,6 +51,11 @@ class HomeBottomBar extends StatelessWidget {
             Icons.shopping_cart_sharp,
             size: 30,
           ),
+          if (userId == 'dYh6xo9XwzRQN5ZlqEoCymqr5Hk1')
+            Icon(
+              Icons.post_add_rounded,
+              size: 30,
+            ),
         ]);
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/product.dart';
-import '../products/page_index_manager.dart';
+import '../products/mix.dart';
 
 class PostAppBar extends StatelessWidget {
   

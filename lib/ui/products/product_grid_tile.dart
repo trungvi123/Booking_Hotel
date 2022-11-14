@@ -31,13 +31,13 @@ class ProductGridTile extends StatelessWidget {
               },
               child: Container(
                 height: 200,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15)),
                   image: DecorationImage(
-                    image: AssetImage("images/city1.jpg"),
+                    image: NetworkImage(product.imageUrl),
                     fit: BoxFit.cover,
                     opacity: 0.8,
                   ),
