@@ -20,10 +20,9 @@ class ProductsOverviewScreen extends StatefulWidget {
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
-  
   final _showOnlyFavorites = ValueNotifier<bool>(false);
   late Future<void> _fetchProducts;
-  
+
   var category = [
     'Best Places',
     'Most Visited',
@@ -41,7 +40,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-  
+    final dataprod = context.watch<ProductsManager>().items;
+    print(dataprod);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
@@ -51,25 +51,37 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
+          padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: [
               Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(12),
+                    child: (Text(
+                      'Best Places',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 23),
+                    )),
+                  ),
+                ],
+              ),
+              Row(
                 children: [
                   Expanded(
-                      child: Container(
+                      child: SizedBox(
                     height: 200,
                     child: ListView.builder(
-                        itemCount: 6,
+                        itemCount: dataprod.length,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => PostScreen()));
+                              Navigator.of(context).pushNamed(
+                                ProductDetailScreen.routeName,
+                                arguments: dataprod[index].id,
+                              );
                             },
                             child: Container(
                               width: 160,
@@ -80,27 +92,29 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                   image:
-                                      AssetImage("images/city${index + 1}.jpg"),
+                                      // AssetImage("images/city${index + 1}.jpg"),
+                                      NetworkImage(dataprod[index].imageUrl),
                                   fit: BoxFit.cover,
                                   opacity: 0.7,
                                 ),
                               ),
                               child: Column(
                                 children: [
-                                  Container(
-                                    alignment: Alignment.topRight,
-                                    child: const Icon(
-                                      Icons.bookmark_border_outlined,
-                                      color: Colors.white,
-                                      size: 30,
-                                    ),
-                                  ),
+                                  // Container(
+                                  //   alignment: Alignment.topRight,
+                                  //   child: const Icon(
+                                  //     Icons.bookmark_border_outlined,
+                                  //     color: Colors.white,
+                                  //     size: 30,
+                                  //   ),
+                                  // ),
                                   const Spacer(),
                                   Container(
                                     alignment: Alignment.bottomLeft,
-                                    child: const Text(
-                                      "Khach San",
+                                    child: Text(
+                                      dataprod[index].title,
                                       style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
                                         color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -155,7 +169,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                     future: _fetchProducts,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                      
                         return ValueListenableBuilder<bool>(
                             valueListenable: _showOnlyFavorites,
                             builder: (context, onlyFavorites, child) {

@@ -5,6 +5,12 @@ class Product {
   final String title;
   final String description;
   final double price;
+
+  final int bedroom;
+  final int bathroom;
+  final int quantityPerson;
+  final List types;
+
   final String imageUrl;
   final String imageUrl2;
   final String imageUrl3;
@@ -17,6 +23,10 @@ class Product {
     required this.title,
     required this.description,
     required this.price,
+    required this.bedroom,
+    required this.bathroom,
+    required this.quantityPerson,
+    required this.types,
     required this.imageUrl,
     required this.imageUrl2,
     required this.imageUrl3,
@@ -42,6 +52,10 @@ class Product {
     String? title,
     String? description,
     double? price,
+    int? bathroom,
+    int? bedroom,
+    int? quantityPerson,
+    List? types,
     String? imageUrl,
     String? imageUrl2,
     String? imageUrl3,
@@ -54,11 +68,14 @@ class Product {
       title: title ?? this.title,
       description: description ?? this.description,
       price: price ?? this.price,
+      bathroom: bathroom ?? this.bathroom,
+      bedroom: bedroom ?? this.bedroom,
+      quantityPerson: quantityPerson ?? this.quantityPerson,
+      types: types ?? this.types,
       imageUrl: imageUrl ?? this.imageUrl,
       imageUrl2: imageUrl2 ?? this.imageUrl2,
       imageUrl3: imageUrl3 ?? this.imageUrl3,
       imageUrl4: imageUrl4 ?? this.imageUrl4,
-
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
@@ -68,6 +85,10 @@ class Product {
       'title': title,
       'description': description,
       'price': price,
+      'bedroom': bedroom,
+      'bathroom': bathroom,
+      'quantityPerson': quantityPerson,
+      'types': types,
       'imageUrl': imageUrl,
       'imageUrl2': imageUrl2,
       'imageUrl3': imageUrl3,
@@ -82,6 +103,10 @@ class Product {
       title: json['title'],
       description: json['description'],
       price: json['price'],
+      bathroom: json['bathroom'],
+      bedroom: json['bedroom'],
+      quantityPerson: json['quantityPerson'],
+      types: json['types'],
       imageUrl: json['imageUrl'],
       imageUrl2: json['imageUrl2'],
       imageUrl3: json['imageUrl3'],

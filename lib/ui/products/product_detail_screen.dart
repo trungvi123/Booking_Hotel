@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myshop/ui/products/show_img_screen.dart';
 
 import '../../models/product.dart';
 import '../widgets/post_app_bar.dart';
@@ -8,29 +9,28 @@ class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
   final Product product;
   bool showFavoriteIcon = true;
-  
+
   ProductDetailScreen(
     this.product, {
     super.key,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     final productFavorite = product.isFavorite;
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: NetworkImage(product.imageUrl),
-              fit: BoxFit.cover,
-              )),
+        image: NetworkImage(product.imageUrl),
+        fit: BoxFit.cover,
+      )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(90),
-            child: PostAppBar(productFavorite,showFavoriteIcon)
-          ),
+              preferredSize: Size.fromHeight(90),
+              child: PostAppBar(productFavorite, showFavoriteIcon)),
           bottomNavigationBar: Container(
-            height: MediaQuery.of(context).size.height / 2,
+            height: MediaQuery.of(context).size.height / 1.5,
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
             decoration: const BoxDecoration(
                 color: Color(0xFFEDF2F6),
@@ -43,27 +43,109 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Container(
+                    height: 30,
+                    child: Text(
+                      product.title,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w600),
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                        size: 25,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 25,
-                          ),
-                          Text(
-                            product.isFavorite.toString(),
-                            style: TextStyle(fontWeight: FontWeight.w600),
-                          )
-                        ],
+                      Text(
+                        '4.5',
+                        style: TextStyle(fontWeight: FontWeight.w600),
                       )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    children: [
+                      Text('Giá: '),
+                      Text(
+                        product.price.toString(),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.bed_rounded,
+                                size: 28,
+                              ),
+                              Text(product.bedroom.toString())
+                            ],
+                          )),
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.bathtub_outlined,
+                                size: 28,
+                              ),
+                              Text(product.bathroom.toString())
+                            ],
+                          )),
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                size: 28,
+                              ),
+                              Text(product.quantityPerson.toString())
+                            ],
+                          )),
                     ],
                   ),
                   const SizedBox(
@@ -79,51 +161,86 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
+                      Text('Loại: '),
+                      Text(
+                        product.types.toString(),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
                       Expanded(
-                          child: Container(
-                        alignment: Alignment.center,
-                        width: 120,
-                        height: 90,
-                        margin: const EdgeInsets.only(right: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: NetworkImage(product.imageUrl2),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                      Expanded(
-                          child: Container(
-                        alignment: Alignment.center,
-                        width: 120,
-                        height: 90,
-                        margin: const EdgeInsets.only(right: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: NetworkImage(product.imageUrl3),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                      Expanded(
-                          child: Container(
-                        alignment: Alignment.center,
-                        width: 120,
-                        height: 90,
-                        margin: const EdgeInsets.only(right: 5),
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                                image: NetworkImage(product.imageUrl4),
+                          child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            ShowImgScreen.routeName,
+                            arguments: product.imageUrl2,
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 120,
+                          height: 90,
+                          margin: const EdgeInsets.only(right: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(product.imageUrl2),
                                 fit: BoxFit.cover,
-                                opacity: 0.4)),
-                        child: const Text(
-                          "10+",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600),
+                              )),
+                        ),
+                      )),
+                      Expanded(
+                          child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            ShowImgScreen.routeName,
+                            arguments: product.imageUrl3,
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 120,
+                          height: 90,
+                          margin: const EdgeInsets.only(right: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(product.imageUrl3),
+                                fit: BoxFit.cover,
+                              )),
+                        ),
+                      )),
+                      Expanded(
+                          child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            ShowImgScreen.routeName,
+                            arguments: product.imageUrl4,
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 120,
+                          height: 90,
+                          margin: const EdgeInsets.only(right: 5),
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                  image: NetworkImage(product.imageUrl4),
+                                  fit: BoxFit.cover,
+                                  opacity: 0.4)),
+                          child: const Text(
+                            "10+",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
                       ))
                     ],

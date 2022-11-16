@@ -30,17 +30,17 @@ class AuthScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "Enjoy",
+                      "Mana",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 35,
+                        fontSize: 50,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.5,
                       ),
                     ),
                     SizedBox(height: 2),
                     Text(
-                      "the world!",
+                      "Hotel",
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
                         fontSize: 35,
@@ -50,10 +50,19 @@ class AuthScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                      'Với sứ mệnh mang đến cho khách hàng các trãi nghiệm tuyệt vời về các chuyến đi, Mana Hotel đang không ngừng cải thiện và phát triển dịch vụ của mình.',
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.7),
-                        fontSize: 16,
+                        fontSize: 18,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      'Chúng tôi ở đây để đảm bảo kỳ nghỉ của bạn bắt đầu ngay khi bạn bước chân vào sảnh của chúng tôi',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.7),
+                        fontSize: 18,
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -64,10 +73,10 @@ class AuthScreen extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: SizedBox(
-              height: deviceSize.height,
+              height: deviceSize.height - 280,
               width: deviceSize.width,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Flexible(

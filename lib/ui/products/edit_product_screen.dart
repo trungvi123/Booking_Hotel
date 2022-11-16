@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/product.dart';
 import '../shared/dialog_utils.dart';
 
+import '../widgets/post_app_bar.dart';
 import 'products_manager.dart';
 
 class EditProductScreen extends StatefulWidget {
@@ -18,6 +19,10 @@ class EditProductScreen extends StatefulWidget {
         title: '',
         description: '',
         price: 0,
+        bathroom: 0,
+        bedroom: 0,
+        quantityPerson: 0,
+        types: [],
         imageUrl: '',
         imageUrl2: '',
         imageUrl3: '',
@@ -46,8 +51,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlFocusNode4 = FocusNode();
 
   final _editForm = GlobalKey<FormState>();
+
   late Product _editedProduct;
+
   var _isLoading = false;
+
+  final checkBoxList = [
+    CheckBoxModal(titleCheckBox: 'Sang trọng'),
+    CheckBoxModal(titleCheckBox: 'Gia đình'),
+    CheckBoxModal(titleCheckBox: 'Cặp đôi'),
+    CheckBoxModal(titleCheckBox: 'Giá rẻ'),
+    CheckBoxModal(titleCheckBox: 'Gần biển'),
+  ];
 
   bool _isValidImageUrl(String value) {
     return (value.startsWith('http') || value.startsWith('https')) &&
@@ -153,14 +168,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Product'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: _saveForm,
-          ),
-        ],
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(90), child: PostAppBar(false, false)
       ),
       body: _isLoading
           ? const Center(
@@ -171,7 +180,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
               child: Form(
                 key: _editForm,
                 child: ListView(
-                  children: <Widget>[
+                  children: [
                     buildTitleField(),
                     buildPriceField(),
                     buildDescriptionField(),
@@ -179,10 +188,53 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     buildProductPreview(2),
                     buildProductPreview(3),
                     buildProductPreview(4),
+                    buildBedroomField(),
+                    buildBathroomField(),
+                    buildQuantityPersonField(),
+                    SizedBox(height: 10,),
+                    Text('Loại',style: TextStyle(fontSize: 25),),
+                    SizedBox(height: 10,),
+                    Column(
+                      children: [
+                        ...checkBoxList.map((item) => Row(
+                              children: [
+                                Checkbox(
+                                  value: item.value,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      item.value =
+                                          !item.value;
+                                      if(value == true){
+                                        _editedProduct.types.add(item.titleCheckBox);
+                                      }else {
+                                        _editedProduct.types.remove(item.titleCheckBox);
+                                      }
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  item.titleCheckBox,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
+                            ))
+                      ],
+                    )
+        
                   ],
                 ),
               ),
             ),
+      bottomNavigationBar: IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: _saveForm,
+          ),
+      
+      // InkWell(
+      //     on: () {
+      //       _saveForm;
+      //     },
+      //     child: Container(height: 100, child: Icon(Icons.save))),
     );
   }
 
@@ -224,6 +276,79 @@ class _EditProductScreenState extends State<EditProductScreen> {
       },
       onSaved: (value) {
         _editedProduct = _editedProduct.copyWith(price: double.parse(value!));
+      },
+    );
+  }
+
+  TextFormField buildBedroomField() {
+    return TextFormField(
+      initialValue: _editedProduct.bedroom.toString(),
+      decoration: const InputDecoration(labelText: 'Bedroom'),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter the number of bedrooms.';
+        }
+        if (int.tryParse(value) == null) {
+          return 'Please enter a valid number.';
+        }
+        if (int.parse(value) <= 0) {
+          return 'Please enter a number greater than zero';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(bedroom: int.parse(value!));
+      },
+    );
+  }
+
+  TextFormField buildBathroomField() {
+    return TextFormField(
+      initialValue: _editedProduct.bathroom.toString(),
+      decoration: const InputDecoration(labelText: 'Bathroom'),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter the number of bathrooms.';
+        }
+        if (int.tryParse(value) == null) {
+          return 'Please enter a valid number.';
+        }
+        if (int.parse(value) <= 0) {
+          return 'Please enter a number greater than zero';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(bathroom: int.parse(value!));
+      },
+    );
+  }
+
+  TextFormField buildQuantityPersonField() {
+    return TextFormField(
+      initialValue: _editedProduct.quantityPerson.toString(),
+      decoration: const InputDecoration(labelText: 'Person'),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter the number of people.';
+        }
+        if (int.tryParse(value) == null) {
+          return 'Please enter a valid number.';
+        }
+        if (int.parse(value) <= 0) {
+          return 'Please enter a number greater than zero';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct =
+            _editedProduct.copyWith(quantityPerson: int.parse(value!));
       },
     );
   }
@@ -344,4 +469,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
       },
     );
   }
+}
+
+class CheckBoxModal {
+  String titleCheckBox;
+  bool value;
+
+  CheckBoxModal({required this.titleCheckBox, this.value = false});
 }

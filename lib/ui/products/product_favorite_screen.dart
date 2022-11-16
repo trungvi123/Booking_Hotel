@@ -1,16 +1,10 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:myshop/models/product.dart';
-import 'package:myshop/ui/cart/cart_screen.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_bottom_bar.dart';
 import './products_grid.dart';
-
-import '../shared/app_drawer.dart';
-import 'top_right_badge.dart';
 
 enum FilterOptions { favorites, all }
 

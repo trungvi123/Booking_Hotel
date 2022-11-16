@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:myshop/ui/products/form_screen.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
+import 'package:myshop/ui/products/show_img_screen.dart';
 
 import 'package:provider/provider.dart';
 
 import 'ui/screens.dart';
-
 
 Future<void> main() async {
   // (1) Load the .env file
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => PageIndexManager(),
         ),
-        
+
         ChangeNotifierProvider(
           create: (context) => AuthManager(),
         ),
@@ -61,8 +61,7 @@ class MyApp extends StatelessWidget {
                 ).copyWith(
                   secondary: Colors.deepOrange,
                 )),
-            home: 
-            authMananger.isAuth
+            home: authMananger.isAuth
                 ? const ProductsOverviewScreen()
                 : FutureBuilder(
                     builder: (ctx, snapshot) {
@@ -75,8 +74,10 @@ class MyApp extends StatelessWidget {
               CartScreen.routeName: (ctx) => CartScreen(),
               // OrdersScreen.routeName: (ctx) => const OrdersScreen(),
               UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
-              ProductFavoriteScreen.routeName:((ctx) => const ProductFavoriteScreen()),
-              FormScreen.routeName:((ctx) => FormScreen()),
+              ProductFavoriteScreen.routeName: (ctx) =>
+                  const ProductFavoriteScreen(),
+              FormScreen.routeName: (ctx) => FormScreen(),
+              // ShowImgScreen.routeName:(ctx) => ShowImgScreen()
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {
@@ -86,6 +87,15 @@ class MyApp extends StatelessWidget {
                     return ProductDetailScreen(
                       ctx.read<ProductsManager>().findByProductId(productId),
                     );
+                  },
+                );
+              }
+
+              if (settings.name == ShowImgScreen.routeName) {
+                final urlImg = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (ctx) {
+                    return ShowImgScreen(urlImg != null ? urlImg : '');
                   },
                 );
               }
@@ -109,8 +119,6 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
-    
     );
-  
   }
 }

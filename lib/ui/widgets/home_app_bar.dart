@@ -11,8 +11,10 @@ class HomeAppBar extends StatelessWidget {
           InkWell(
             onTap:() {},
             child: Container(
+              
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
+                
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -28,22 +30,22 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            children:[ 
-              Icon(
-                Icons.location_on,
-                color: Color(0xFFF65959),  
-              ),
-              Text(
-                "New York, USA",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                )
+          // Row(
+          //   children:[ 
+          //     Icon(
+          //       Icons.location_on,
+          //       color: Color(0xFFF65959),  
+          //     ),
+          //     Text(
+          //       "New York, USA",
+          //       style: TextStyle(
+          //         fontSize: 18,
+          //         fontWeight: FontWeight.w500,
+          //       ),
+          //       )
                    
-            ],
-          ),
+          //   ],
+          // ),
           InkWell(
             onTap: () {},
             child: Container(
