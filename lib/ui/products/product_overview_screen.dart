@@ -41,12 +41,16 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     final dataprod = context.watch<ProductsManager>().items;
-    print(dataprod);
+    final deviceSize = MediaQuery.of(context).size;
+    final bodyHeight = deviceSize.height - 300;  // tru cho appbar 150 + bot 150
+
     return Scaffold(
+      extendBody: true,
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(90.0),
-        child: HomeAppBar(),
+        preferredSize: Size.fromHeight(150),
+        child: Container(
+            margin: const EdgeInsets.only(top: 50), child: HomeAppBar()),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -70,7 +74,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 children: [
                   Expanded(
                       child: SizedBox(
-                    height: 200,
+                    height: bodyHeight * 0.2,
                     child: ListView.builder(
                         itemCount: dataprod.length,
                         scrollDirection: Axis.horizontal,
@@ -100,14 +104,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                               ),
                               child: Column(
                                 children: [
-                                  // Container(
-                                  //   alignment: Alignment.topRight,
-                                  //   child: const Icon(
-                                  //     Icons.bookmark_border_outlined,
-                                  //     color: Colors.white,
-                                  //     size: 30,
-                                  //   ),
-                                  // ),
                                   const Spacer(),
                                   Container(
                                     alignment: Alignment.bottomLeft,
@@ -164,7 +160,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               ),
               SizedBox(height: 10),
               SizedBox(
-                height: 1000,
+                height: bodyHeight * 0.7 + bodyHeight * 0.3,
+                // bodyHeight * 0.7 noi dung chính chiếm 70%
+                // + bodyHeight * 0.3 cộng thêm chiều cao của nội dung phụ phía 
+                // trên để scroll phía trên lên đc và nội dung chính được rộng hơn 
                 child: FutureBuilder(
                     future: _fetchProducts,
                     builder: (context, snapshot) {

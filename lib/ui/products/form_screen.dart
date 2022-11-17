@@ -110,8 +110,10 @@ class FormScreenState extends State<FormScreen> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90),
-        child: PostAppBar(false, showFavoriteIcon),
+        preferredSize: Size.fromHeight(150),
+        child: Container(
+            margin: const EdgeInsets.only(top: 50),
+            child: PostAppBar(false, showFavoriteIcon)),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -137,11 +139,6 @@ class FormScreenState extends State<FormScreen> {
                     }
 
                     _formKey.currentState?.save();
-
-                    // print(_email);
-                    // print(_name);
-                    // print(_note);
-                    // print(_numberphone);
 
                     final order = Order(
                         name: _name,

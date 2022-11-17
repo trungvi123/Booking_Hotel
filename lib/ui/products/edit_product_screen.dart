@@ -22,7 +22,7 @@ class EditProductScreen extends StatefulWidget {
         bathroom: 0,
         bedroom: 0,
         quantityPerson: 0,
-        types: [],
+        types: '',
         imageUrl: '',
         imageUrl2: '',
         imageUrl3: '',
@@ -53,7 +53,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _editForm = GlobalKey<FormState>();
 
   late Product _editedProduct;
-
+  final List typeSelect = [];
   var _isLoading = false;
 
   final checkBoxList = [
@@ -139,6 +139,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (!isValid) {
       return;
     }
+    _editedProduct.types = typeSelect.toString();
     _editForm.currentState!.save();
 
     setState(() {
@@ -169,7 +170,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90), child: PostAppBar(false, false)
+        preferredSize: Size.fromHeight(150),
+        child: Container(
+            margin: const EdgeInsets.only(top: 50),
+            child: PostAppBar(false, false)),
       ),
       body: _isLoading
           ? const Center(
@@ -191,9 +195,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     buildBedroomField(),
                     buildBathroomField(),
                     buildQuantityPersonField(),
-                    SizedBox(height: 10,),
-                    Text('Loại',style: TextStyle(fontSize: 25),),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Loại',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Column(
                       children: [
                         ...checkBoxList.map((item) => Row(
@@ -202,39 +213,32 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                   value: item.value,
                                   onChanged: (value) {
                                     setState(() {
-                                      item.value =
-                                          !item.value;
-                                      if(value == true){
-                                        _editedProduct.types.add(item.titleCheckBox);
-                                      }else {
-                                        _editedProduct.types.remove(item.titleCheckBox);
+                                      item.value = !item.value;
+                                      if (value == true) {
+                                        typeSelect.add(item.titleCheckBox);
+                                      } else {
+                                        typeSelect.remove(item.titleCheckBox);
                                       }
                                     });
                                   },
                                 ),
                                 Text(
                                   item.titleCheckBox,
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ],
                             ))
                       ],
                     )
-        
                   ],
                 ),
               ),
             ),
       bottomNavigationBar: IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: _saveForm,
-          ),
-      
-      // InkWell(
-      //     on: () {
-      //       _saveForm;
-      //     },
-      //     child: Container(height: 100, child: Icon(Icons.save))),
+        icon: const Icon(Icons.save),
+        onPressed: _saveForm,
+      ),
+
     );
   }
 

@@ -33,6 +33,7 @@ class ProductsManager with ChangeNotifier {
 
   Future<void> fetchProducts([bool filterByUser = false]) async {
     _items = await _productsService.fetchProducts(filterByUser);
+    // print(_items);
     notifyListeners();
   }
 

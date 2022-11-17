@@ -15,6 +15,7 @@ class AuthScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
+            width: deviceSize.width,
             decoration: const BoxDecoration(
                 image: DecorationImage(
               image: AssetImage("images/bg.jpg"),
@@ -27,6 +28,7 @@ class AuthScreen extends StatelessWidget {
                   child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 65, horizontal: 25),
                 child: Column(
+                  
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
@@ -48,24 +50,7 @@ class AuthScreen extends StatelessWidget {
                         letterSpacing: 1.5,
                       ),
                     ),
-                    SizedBox(height: 12),
-                    Text(
-                      'Với sứ mệnh mang đến cho khách hàng các trãi nghiệm tuyệt vời về các chuyến đi, Mana Hotel đang không ngừng cải thiện và phát triển dịch vụ của mình.',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
-                        fontSize: 18,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                    SizedBox(height: 12),
-                    Text(
-                      'Chúng tôi ở đây để đảm bảo kỳ nghỉ của bạn bắt đầu ngay khi bạn bước chân vào sảnh của chúng tôi',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
-                        fontSize: 18,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
+                    
                   ],
                 ),
               )),
@@ -73,7 +58,7 @@ class AuthScreen extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: SizedBox(
-              height: deviceSize.height - 280,
+              height: deviceSize.height - 180,
               width: deviceSize.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,

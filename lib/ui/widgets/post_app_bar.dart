@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../models/product.dart';
 import '../products/mix.dart';
 
 class PostAppBar extends StatelessWidget {
@@ -23,7 +21,7 @@ class PostAppBar extends StatelessWidget {
               Navigator.pop(context);
             },
             child: Container(
-              alignment: Alignment.center,
+              // alignment: Alignment.center,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.white,

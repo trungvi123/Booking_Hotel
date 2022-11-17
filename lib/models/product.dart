@@ -9,7 +9,7 @@ class Product {
   final int bedroom;
   final int bathroom;
   final int quantityPerson;
-  final List types;
+  late final String types;
 
   final String imageUrl;
   final String imageUrl2;
@@ -55,7 +55,7 @@ class Product {
     int? bathroom,
     int? bedroom,
     int? quantityPerson,
-    List? types,
+    String? types,
     String? imageUrl,
     String? imageUrl2,
     String? imageUrl3,
@@ -103,10 +103,12 @@ class Product {
       title: json['title'],
       description: json['description'],
       price: json['price'],
+
       bathroom: json['bathroom'],
       bedroom: json['bedroom'],
       quantityPerson: json['quantityPerson'],
       types: json['types'],
+
       imageUrl: json['imageUrl'],
       imageUrl2: json['imageUrl2'],
       imageUrl3: json['imageUrl3'],

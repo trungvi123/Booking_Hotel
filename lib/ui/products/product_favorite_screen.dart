@@ -37,11 +37,14 @@ class _ProductFavoriteScreenState extends State<ProductFavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(90.0),
-        child: HomeAppBar(),
+        preferredSize: Size.fromHeight(150),
+        child: Container(
+            margin: const EdgeInsets.only(top: 50),
+            child: HomeAppBar()),
       ),
       body: SafeArea(
           child: SingleChildScrollView(

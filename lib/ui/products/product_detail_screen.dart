@@ -26,9 +26,12 @@ class ProductDetailScreen extends StatelessWidget {
       )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: PreferredSize(
-              preferredSize: Size.fromHeight(90),
-              child: PostAppBar(productFavorite, showFavoriteIcon)),
+           appBar: PreferredSize(
+        preferredSize: Size.fromHeight(150),
+        child: Container(
+            margin: const EdgeInsets.only(top: 50),
+            child: PostAppBar(productFavorite, showFavoriteIcon)),
+      ),
           bottomNavigationBar: Container(
             height: MediaQuery.of(context).size.height / 1.5,
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -163,7 +166,7 @@ class ProductDetailScreen extends StatelessWidget {
                     children: [
                       Text('Loại: '),
                       Text(
-                        product.types.toString(),
+                        product.types.replaceAll('[\'','').replaceAll('\']','').replaceAll('\'','').toLowerCase(),
                       )
                     ],
                   ),

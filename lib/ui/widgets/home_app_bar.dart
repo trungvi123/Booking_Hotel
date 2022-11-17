@@ -9,12 +9,10 @@ class HomeAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
-            onTap:() {},
+            onTap: () {},
             child: Container(
-              
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -26,15 +24,15 @@ class HomeAppBar extends StatelessWidget {
               ),
               child: Icon(
                 Icons.sort_rounded,
-                size:28,
+                size: 28,
               ),
             ),
           ),
           // Row(
-          //   children:[ 
+          //   children:[
           //     Icon(
           //       Icons.location_on,
-          //       color: Color(0xFFF65959),  
+          //       color: Color(0xFFF65959),
           //     ),
           //     Text(
           //       "New York, USA",
@@ -43,7 +41,7 @@ class HomeAppBar extends StatelessWidget {
           //         fontWeight: FontWeight.w500,
           //       ),
           //       )
-                   
+
           //   ],
           // ),
           InkWell(
