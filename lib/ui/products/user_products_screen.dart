@@ -42,13 +42,12 @@ class UserProductsScreen extends StatelessWidget {
         },
       ),
       bottomNavigationBar: Container(
-        height: 150,
+        height: 80,
         child: IconButton(
           icon: const Icon(Icons.playlist_add_outlined,size: 28),
           onPressed: () {
-            Navigator.of(context).pushNamed(
-            EditProductScreen.routeName,
-          );
+            Navigator.of(context)
+                  .pushReplacementNamed(EditProductScreen.routeName);
           },
         ),
       ),
@@ -73,14 +72,4 @@ class UserProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildAddButton(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.add),
-      onPressed: () {
-        Navigator.of(context).pushNamed(
-          EditProductScreen.routeName,
-        );
-      },
-    );
-  }
 }

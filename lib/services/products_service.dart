@@ -98,7 +98,6 @@ class ProductsService extends FirebaseService {
   }
 
   Future<bool> deleteProduct(String id) async {
-  
     try {
       final url = Uri.parse('$databaseUrl/products/$id.json?auth=$token');
       final response = await http.delete(url);

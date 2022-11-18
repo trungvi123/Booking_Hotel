@@ -236,9 +236,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 ),
               ),
             ),
-      bottomNavigationBar: IconButton(
-        icon: const Icon(Icons.save),
-        onPressed: _saveForm,
+      bottomNavigationBar: Container(
+        height: 80,
+        child: IconButton(
+          icon: const Icon(Icons.save),
+          onPressed: _saveForm,
+        ),
       ),
     );
   }

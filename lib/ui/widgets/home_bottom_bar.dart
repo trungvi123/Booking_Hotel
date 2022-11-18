@@ -35,8 +35,8 @@ class HomeBottomBar extends StatelessWidget {
                 }
                 else {
                   context.read<PageIndexManager>().add(3),
-                  Navigator.of(context)
-                  .pushReplacementNamed(UserProductsScreen.routeName)
+              
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName)
                 }
             },
         items: [

@@ -84,7 +84,7 @@ class OrderService extends FirebaseService {
     try {
       final url = Uri.parse('$databaseUrl/order/$id.json?auth=$token');
       final response = await http.delete(url);
-
+      
       if (response.statusCode != 200) {
         throw Exception(json.decode(response.body)['error']);
       }
