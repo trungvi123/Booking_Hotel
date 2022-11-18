@@ -139,7 +139,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (!isValid) {
       return;
     }
-    _editedProduct.types = typeSelect.toString();
+    _editedProduct.copyWith(types: typeSelect.toString());
+
     _editForm.currentState!.save();
 
     setState(() {
@@ -185,16 +186,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 key: _editForm,
                 child: ListView(
                   children: [
-                    buildTitleField(),
-                    buildPriceField(),
-                    buildDescriptionField(),
-                    buildProductPreview(1),
-                    buildProductPreview(2),
-                    buildProductPreview(3),
-                    buildProductPreview(4),
-                    buildBedroomField(),
-                    buildBathroomField(),
-                    buildQuantityPersonField(),
                     SizedBox(
                       height: 10,
                     ),
@@ -229,7 +220,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               ],
                             ))
                       ],
-                    )
+                    ),
+                    buildTitleField(),
+                    buildPriceField(),
+                    buildDescriptionField(),
+                    buildProductPreview(1),
+                    buildProductPreview(2),
+                    buildProductPreview(3),
+                    buildProductPreview(4),
+                    buildBedroomField(),
+                    buildBathroomField(),
+                    buildQuantityPersonField(),
+                    
                   ],
                 ),
               ),
@@ -238,7 +240,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
         icon: const Icon(Icons.save),
         onPressed: _saveForm,
       ),
-
     );
   }
 

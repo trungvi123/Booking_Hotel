@@ -19,7 +19,7 @@ class ProductsService extends FirebaseService {
           filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
       final productsUrl =
           Uri.parse('$databaseUrl/products.json?auth=$token&$filters');
-          
+          print(productsUrl);
       final response = await http.get(productsUrl);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
 
@@ -33,31 +33,18 @@ class ProductsService extends FirebaseService {
           Uri.parse('$databaseUrl/userFavorites/$userId.json?auth=$token');
       final userFavoritesResponse = await http.get(userFavoritesUrl);
       final userFavoritesMap = json.decode(userFavoritesResponse.body);
- 
-
-
       productsMap.forEach((productId, product) {
-        print(productId);
-        print(product);
-
-        print('hi');
         final isFavorite = (userFavoritesMap == null)
             ? false
             : (userFavoritesMap[productId] ?? false);
-           print(isFavorite); 
         products.add(
           Product.fromJson({
             'id': productId,
             ...product,
           }).copyWith(isFavorite: isFavorite),
         );
-print(products); 
 
       });
-
-        print('thanh cong3');
-
-
       return products;
     } catch (error) {
       print(error);
@@ -111,6 +98,7 @@ print(products);
   }
 
   Future<bool> deleteProduct(String id) async {
+  
     try {
       final url = Uri.parse('$databaseUrl/products/$id.json?auth=$token');
       final response = await http.delete(url);

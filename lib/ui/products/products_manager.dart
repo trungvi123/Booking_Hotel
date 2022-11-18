@@ -17,7 +17,6 @@ class ProductsManager with ChangeNotifier {
     // ),
   ];
 
-
   final ProductsService _productsService;
 
   ProductsManager([AuthToken? authToken])
@@ -33,7 +32,6 @@ class ProductsManager with ChangeNotifier {
 
   Future<void> fetchProducts([bool filterByUser = false]) async {
     _items = await _productsService.fetchProducts(filterByUser);
-    // print(_items);
     notifyListeners();
   }
 
@@ -49,6 +47,51 @@ class ProductsManager with ChangeNotifier {
     return _items.where((prodItem) => prodItem.isFavorite).toList();
   }
 
+  Future<List<Product>> get sangTrongProd async {
+    await fetchProducts();
+    _items = _items
+        .where((prodItem) => prodItem.types.contains('Sang trọng'))
+        .toList();
+    notifyListeners();
+    return [];
+  }
+
+Future<List<Product>> get giaDinhProd async {
+    await fetchProducts();
+    _items = _items
+        .where((prodItem) => prodItem.types.contains('Gia đình'))
+        .toList();
+        print(_items);
+    notifyListeners();
+    return [];
+  }
+Future<List<Product>> get giaReProd async {
+  await fetchProducts();
+    _items = _items
+        .where((prodItem) => prodItem.types.contains('Giá rẻ'))
+        .toList();
+    notifyListeners();
+    return [];
+  }
+
+  Future<List<Product>> get capDoiProd async {
+    await fetchProducts();
+    _items = _items
+        .where((prodItem) => prodItem.types.contains('Cặp đôi'))
+        .toList();
+    notifyListeners();
+    return [];
+  }
+
+Future<List<Product>> get ganBienProd async {
+  await fetchProducts();
+    _items = _items
+        .where((prodItem) => prodItem.types.contains('Gần biển'))
+        .toList();
+    notifyListeners();
+    return [];
+  }
+
   Product findByProductId(String id) {
     return _items.firstWhere((prod) => prod.id == id);
   }
@@ -60,8 +103,6 @@ class ProductsManager with ChangeNotifier {
       notifyListeners();
     }
   }
-
-  
 
   Future<void> updateProduct(Product product) async {
     final index = _items.indexWhere((item) => item.id == product.id);
@@ -93,6 +134,4 @@ class ProductsManager with ChangeNotifier {
       product.isFavorite = savedStatus;
     }
   }
-
-  
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/products/edit_product_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/post_app_bar.dart';
 import 'user_product_list_tile.dart';
 import 'products_manager.dart';
 
@@ -20,11 +21,11 @@ class UserProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsMananger = ProductsManager();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your products'),
-        actions: <Widget>[
-          buildAddButton(context),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(150),
+        child: Container(
+            margin: const EdgeInsets.only(top: 50),
+            child: PostAppBar(false, false)),
       ),
       drawer: const AppDrawer(),
       body: FutureBuilder(
@@ -39,6 +40,17 @@ class UserProductsScreen extends StatelessWidget {
             child: buildUserProductListView(productsMananger),
           );
         },
+      ),
+      bottomNavigationBar: Container(
+        height: 150,
+        child: IconButton(
+          icon: const Icon(Icons.playlist_add_outlined,size: 28),
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+            EditProductScreen.routeName,
+          );
+          },
+        ),
       ),
     );
   }

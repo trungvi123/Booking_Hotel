@@ -16,35 +16,28 @@ class ProductsGrid extends StatelessWidget {
     final products = context.select<ProductsManager, List<Product>>(
         (productsManager) => showFavorites
             ? productsManager.favoriteItems
-            : productsManager.items
-            
-            );
+            : productsManager.items);
 
-    if (products.isEmpty) {
-      return  Column(
-          children: [
-            Container(
-              height: 500,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://static.wikia.nocookie.net/meme/images/6/6b/Y_sad-broken-heart.png/revision/latest?cb=20150704221609'),
-                      fit: BoxFit.fitWidth)),
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'Bạn chưa thích sản phẩm nào cả :((',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    
-                      ),
-                ),
-              ),
-            ),
-          ],
-        );
+    if (products.isEmpty && showFavorites) {
+      return Container(
+        alignment: Alignment.topCenter,
+        height: 500,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/likeBg.jpg'), fit: BoxFit.fitWidth)),
+      );
+    } else if (products.isEmpty && !showFavorites) {
+      return Column(
+        children: [
+          Container(
+            height: 500,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/oopsBg.jpg'),
+                    fit: BoxFit.fitWidth)),
+          ),
+        ],
+      );
     } else {
       return GridView.builder(
         padding: const EdgeInsets.all(10.0),

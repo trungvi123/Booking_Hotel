@@ -24,12 +24,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   late Future<void> _fetchProducts;
 
   var category = [
-    'Best Places',
-    'Most Visited',
-    'Favourites',
-    'New Added',
-    'Hotels',
-    'Restaurants',
+    'Tất cả',
+    'Sang trọng',
+    'Gia đình',
+    'Cặp đôi',
+    'Giá rẻ',
+    'Gần biển',
   ];
 
   @override
@@ -42,7 +42,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     final dataprod = context.watch<ProductsManager>().items;
     final deviceSize = MediaQuery.of(context).size;
-    final bodyHeight = deviceSize.height - 300;  // tru cho appbar 150 + bot 150
+    final bodyHeight = deviceSize.height - 300; // tru cho appbar 150 + bot 150
 
     return Scaffold(
       extendBody: true,
@@ -146,11 +146,52 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                               ),
                             ],
                           ),
-                          child: Text(
-                            category[i],
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                          child: InkWell(
+                            onTap: () {
+                              switch (category[i].toString()) {
+                                case 'Sang trọng':
+                                  {
+                                    context
+                                        .read<ProductsManager>()
+                                        .sangTrongProd;
+                                  }
+                                  break;
+                                case 'Gia đình':
+                                  {
+                                    context.read<ProductsManager>().giaDinhProd;
+                                  }
+                                  break;
+                                case 'Cặp đôi':
+                                  {
+                                    context.read<ProductsManager>().capDoiProd;
+                                  }
+                                  break;
+                                case 'Giá rẻ':
+                                  {
+                                    context.read<ProductsManager>().giaReProd;
+                                  }
+                                  break;
+
+                                case 'Gần biển':
+                                  {
+                                    context.read<ProductsManager>().ganBienProd;
+                                  }
+                                  break;
+
+                                default:
+                                  {
+                                    context.read<ProductsManager>().fetchProducts();
+
+                                  }
+                                  break;
+                              }
+                            },
+                            child: Text(
+                              category[i],
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
@@ -162,8 +203,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               SizedBox(
                 height: bodyHeight * 0.7 + bodyHeight * 0.3,
                 // bodyHeight * 0.7 noi dung chính chiếm 70%
-                // + bodyHeight * 0.3 cộng thêm chiều cao của nội dung phụ phía 
-                // trên để scroll phía trên lên đc và nội dung chính được rộng hơn 
+                // + bodyHeight * 0.3 cộng thêm chiều cao của nội dung phụ phía
+                // trên để scroll phía trên lên đc và nội dung chính được rộng hơn
                 child: FutureBuilder(
                     future: _fetchProducts,
                     builder: (context, snapshot) {

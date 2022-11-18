@@ -6,6 +6,7 @@ import 'package:myshop/ui/products/mix.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
 import 'package:provider/provider.dart';
 import '../cart/cart_screen.dart';
+import '../products/user_products_screen.dart';
 
 class HomeBottomBar extends StatelessWidget {
   HomeBottomBar({super.key});
@@ -32,10 +33,10 @@ class HomeBottomBar extends StatelessWidget {
                   context.read<PageIndexManager>().add(2),
                   Navigator.of(context).pushNamed(CartScreen.routeName)
                 }
-              else
-                {
+                else {
                   context.read<PageIndexManager>().add(3),
-                  Navigator.of(context).pushNamed(EditProductScreen.routeName)
+                  Navigator.of(context)
+                  .pushReplacementNamed(UserProductsScreen.routeName)
                 }
             },
         items: [
