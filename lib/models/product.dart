@@ -9,7 +9,7 @@ class Product {
   final int bedroom;
   final int bathroom;
   final int quantityPerson;
-  late final String types;
+  final String types;
 
   final String imageUrl;
   final String imageUrl2;

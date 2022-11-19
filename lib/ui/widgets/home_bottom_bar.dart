@@ -1,7 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/auth/auth_manager.dart';
-import 'package:myshop/ui/products/edit_product_screen.dart';
 import 'package:myshop/ui/products/mix.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +8,7 @@ import '../cart/cart_screen.dart';
 import '../products/user_products_screen.dart';
 
 class HomeBottomBar extends StatelessWidget {
-  HomeBottomBar({super.key});
+  const HomeBottomBar({super.key});
   @override
   Widget build(BuildContext context) {
     final userId = context.watch<AuthManager>().authToken!.userId;
@@ -40,20 +39,20 @@ class HomeBottomBar extends StatelessWidget {
                 }
             },
         items: [
-          Icon(
+          const Icon(
             Icons.favorite_outline,
             size: 30,
           ),
-          Icon(
+          const Icon(
             Icons.home,
             size: 30,
           ),
-          Icon(
+          const Icon(
             Icons.shopping_cart_sharp,
             size: 30,
           ),
           if (userId == 'dYh6xo9XwzRQN5ZlqEoCymqr5Hk1')
-            Icon(
+            const Icon(
               Icons.post_add_rounded,
               size: 30,
             ),

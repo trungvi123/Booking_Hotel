@@ -44,6 +44,7 @@ class AuthService{
 
       return authToken;
     } catch (error) {
+      // ignore: avoid_print
       print(error);
       rethrow;
     }

@@ -6,7 +6,6 @@ import '../widgets/post_app_bar.dart';
 import 'user_product_list_tile.dart';
 import 'products_manager.dart';
 
-import '../shared/app_drawer.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
@@ -22,12 +21,11 @@ class UserProductsScreen extends StatelessWidget {
     final productsMananger = ProductsManager();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
             margin: const EdgeInsets.only(top: 50),
-            child: PostAppBar(false, false)),
+            child: const PostAppBar(false, false)),
       ),
-      drawer: const AppDrawer(),
       body: FutureBuilder(
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,7 +39,7 @@ class UserProductsScreen extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 80,
         child: IconButton(
           icon: const Icon(Icons.playlist_add_outlined,size: 28),

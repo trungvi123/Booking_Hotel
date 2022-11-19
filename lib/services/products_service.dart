@@ -19,12 +19,11 @@ class ProductsService extends FirebaseService {
           filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
       final productsUrl =
           Uri.parse('$databaseUrl/products.json?auth=$token&$filters');
-          print(productsUrl);
+          // print(productsUrl);
       final response = await http.get(productsUrl);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
 
       if (response.statusCode != 200) {
-        print(productsMap['error']);
         return products;
       }
       
@@ -47,7 +46,6 @@ class ProductsService extends FirebaseService {
       });
       return products;
     } catch (error) {
-      print(error);
       return products;
     }
   }
@@ -72,7 +70,6 @@ class ProductsService extends FirebaseService {
         id: json.decode(response.body)['name'],
       );
     } catch (error) {
-      print(error);
       return null;
     }
   }
@@ -92,7 +89,6 @@ class ProductsService extends FirebaseService {
 
       return true;
     } catch (error) {
-      print(error);
       return false;
     }
   }
@@ -108,7 +104,6 @@ class ProductsService extends FirebaseService {
 
       return true;
     } catch (error) {
-      print(error);
       return false;
     }
   }
@@ -130,7 +125,6 @@ class ProductsService extends FirebaseService {
 
       return true;
     } catch (error) {
-      print(error);
       return false;
     }
   }

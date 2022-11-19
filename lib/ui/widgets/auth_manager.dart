@@ -30,7 +30,6 @@ class AuthManager with ChangeNotifier {
   }
 
   Future<void> login(String email, String password) async {
-    print(email);
     _setAuthToken(await _authService.login(email, password));
   }
 

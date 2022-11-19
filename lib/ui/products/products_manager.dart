@@ -5,17 +5,8 @@ import '../../models/product.dart';
 import '../../services/products_service.dart';
 
 class ProductsManager with ChangeNotifier {
-  List<Product> _items = [
-    // Product(
-    //   id: 'p1',
-    //   title: 'Red Shirt',
-    //   description: 'A red shirt - it is pretty red!',
-    //   price: 29.99,
-    //   imageUrl:
-    //       'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
-    //   isFavorite: true,
-    // ),
-  ];
+  List<Product> _items = [];
+  List<Product> _items2 = [];
 
   final ProductsService _productsService;
 
@@ -32,6 +23,7 @@ class ProductsManager with ChangeNotifier {
 
   Future<void> fetchProducts([bool filterByUser = false]) async {
     _items = await _productsService.fetchProducts(filterByUser);
+    _items2 = await _productsService.fetchProducts(filterByUser);
     notifyListeners();
   }
 
@@ -41,6 +33,10 @@ class ProductsManager with ChangeNotifier {
 
   List<Product> get items {
     return [..._items];
+  }
+
+  List<Product> get items2 {
+    return [..._items2];
   }
 
   List<Product> get favoriteItems {
@@ -61,7 +57,6 @@ Future<List<Product>> get giaDinhProd async {
     _items = _items
         .where((prodItem) => prodItem.types.contains('Gia đình'))
         .toList();
-        print(_items);
     notifyListeners();
     return [];
   }

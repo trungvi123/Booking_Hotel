@@ -26,7 +26,7 @@ class AuthScreen extends StatelessWidget {
               color: Colors.transparent,
               child: SafeArea(
                   child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 65, horizontal: 25),
+                padding: const EdgeInsets.symmetric(vertical: 65, horizontal: 25),
                 child: Column(
                   
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class AuthScreen extends StatelessWidget {
                         letterSpacing: 1.5,
                       ),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                     Text(
                       "Hotel",
                       style: TextStyle(

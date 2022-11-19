@@ -41,7 +41,7 @@ class _ProductFavoriteScreenState extends State<ProductFavoriteScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
             margin: const EdgeInsets.only(top: 50),
             child: HomeAppBar()),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myshop/models/product.dart';
-import 'package:myshop/ui/cart/cart_screen.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
 
@@ -8,8 +6,6 @@ import '../widgets/home_app_bar.dart';
 import '../widgets/home_bottom_bar.dart';
 import './products_grid.dart';
 
-import '../shared/app_drawer.dart';
-import 'top_right_badge.dart';
 
 enum FilterOptions { favorites, all }
 
@@ -40,7 +36,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final dataprod = context.watch<ProductsManager>().items;
+    final dataprod = context.watch<ProductsManager>().items2;
     final deviceSize = MediaQuery.of(context).size;
     final bodyHeight = deviceSize.height - 300; // tru cho appbar 150 + bot 150
 
@@ -48,9 +44,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       extendBody: true,
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
-            margin: const EdgeInsets.only(top: 50), child: HomeAppBar()),
+            margin: const EdgeInsets.only(top: 50), child: const HomeAppBar()),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -96,7 +92,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                   image:
-                                      // AssetImage("images/city${index + 1}.jpg"),
                                       NetworkImage(dataprod[index].imageUrl),
                                   fit: BoxFit.cover,
                                   opacity: 0.7,
@@ -109,7 +104,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                                     alignment: Alignment.bottomLeft,
                                     child: Text(
                                       dataprod[index].title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         overflow: TextOverflow.ellipsis,
                                         color: Colors.white,
                                         fontSize: 18,
@@ -129,13 +124,13 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Row(
                     children: [
                       for (int i = 0; i < 6; i++)
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -199,7 +194,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               SizedBox(
                 height: bodyHeight * 0.7 + bodyHeight * 0.3,
                 // bodyHeight * 0.7 noi dung chính chiếm 70%
@@ -225,51 +220,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ),
       )),
       bottomNavigationBar: HomeBottomBar(),
-    );
-  }
-
-  Widget buildShoppingCartIcon() {
-    return Consumer<CartManager>(
-      builder: (ctx, cartManager, child) {
-        return TopRightBadge(
-          data: cartManager.productCount,
-          child: IconButton(
-            icon: const Icon(
-              Icons.shopping_cart,
-            ),
-            onPressed: () {
-              Navigator.of(context).pushNamed(CartScreen.routeName);
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  Widget buildProductFilterMenu() {
-    return PopupMenuButton(
-      onSelected: (FilterOptions selectedValue) {
-        setState(() {
-          if (selectedValue == FilterOptions.favorites) {
-            _showOnlyFavorites.value = true;
-          } else {
-            _showOnlyFavorites.value = false;
-          }
-        });
-      },
-      icon: const Icon(
-        Icons.more_vert,
-      ),
-      itemBuilder: (ctx) => [
-        const PopupMenuItem(
-          value: FilterOptions.favorites,
-          child: Text('Only favorites'),
-        ),
-        const PopupMenuItem(
-          value: FilterOptions.all,
-          child: Text('Show All'),
-        ),
-      ],
     );
   }
 }

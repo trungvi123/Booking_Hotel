@@ -23,13 +23,11 @@ class OrderService extends FirebaseService {
       final ordersMap = json.decode(response.body) as Map<String, dynamic>;
 
       if (response.statusCode != 200) {
-        print(ordersMap['error']);
         return orders;
       }
      
       return orders;
     } catch (error) {
-      print(error);
       return orders;
     }
   }
@@ -47,7 +45,6 @@ class OrderService extends FirebaseService {
         ),
       );
       if (response.statusCode != 200) {
-        print(json.decode(response.body));
         throw Exception(json.decode(response.body)['error']);
       }
 
@@ -55,7 +52,6 @@ class OrderService extends FirebaseService {
         id: json.decode(response.body)['name'],
       );
     } catch (error) {
-      print(error);
       return null;
     }
   }
@@ -75,7 +71,6 @@ class OrderService extends FirebaseService {
 
       return true;
     } catch (error) {
-      print(error);
       return false;
     }
   }
@@ -90,7 +85,6 @@ class OrderService extends FirebaseService {
       }
       return true;
     } catch (error) {
-      print(error);
       return false;
     }
   }

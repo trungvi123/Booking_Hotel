@@ -33,7 +33,7 @@ class ProductGridTile extends StatelessWidget {
                 height: 200,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15)),
                   image: DecorationImage(
@@ -81,11 +81,11 @@ class ProductGridTile extends StatelessWidget {
             ..showSnackBar(
               SnackBar(
                 content: const Text(
-                  'Item  added to cart',
+                  'Thêm sản phẩm vào giỏ thành công!',
                 ),
                 duration: const Duration(seconds: 2),
                 action: SnackBarAction(
-                  label: 'UNDO',
+                  label: 'Hủy',
                   onPressed: () {
                     cart.removeSingleItem(product.id!);
                   },

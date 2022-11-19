@@ -37,7 +37,7 @@ class CartItemCard extends StatelessWidget {
       confirmDismiss: (direction) {
         return showConfirmDialog(
           context,
-          'Do you want to remove this item from the cart?',
+          'Bạn thực sự muốn xóa sản phẩm này?',
         );
       },
       onDismissed: (direction) {

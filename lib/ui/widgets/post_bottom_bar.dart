@@ -106,14 +106,14 @@ class PostBottomBar extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 15,),
-              Container(
+              const SizedBox(height: 15,),
+              SizedBox(
                 height: 70,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 15,horizontal: 25),
+                      padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 25),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.blueAccent,
@@ -124,7 +124,7 @@ class PostBottomBar extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Text(
+                      child: const Text(
                         "Book Now",
                         style: TextStyle(
                           color: Colors.white,

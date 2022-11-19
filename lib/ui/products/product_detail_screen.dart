@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/products/show_img_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/product.dart';
+import '../cart/cart_manager.dart';
 import '../widgets/post_app_bar.dart';
-import '../widgets/post_bottom_bar.dart';
+import 'form_screen.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
@@ -26,12 +28,12 @@ class ProductDetailScreen extends StatelessWidget {
       )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
-           appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
-        child: Container(
-            margin: const EdgeInsets.only(top: 50),
-            child: PostAppBar(productFavorite, showFavoriteIcon)),
-      ),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(150),
+            child: Container(
+                margin: const EdgeInsets.only(top: 50),
+                child: PostAppBar(productFavorite, showFavoriteIcon)),
+          ),
           bottomNavigationBar: Container(
             height: MediaQuery.of(context).size.height / 1.5,
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -46,18 +48,18 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 30,
                     child: Text(
                       product.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           overflow: TextOverflow.ellipsis),
                     ),
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -70,27 +72,27 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 18,
                   ),
                   Row(
                     children: [
-                      Text('Giá: '),
+                      const Text('Giá: '),
                       Text(
-                        product.price.toString(),
+                        '${product.price}\$',
                       )
                     ],
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 18,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 6,
@@ -100,7 +102,7 @@ class ProductDetailScreen extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.bed_rounded,
                                 size: 28,
                               ),
@@ -108,10 +110,10 @@ class ProductDetailScreen extends StatelessWidget {
                             ],
                           )),
                       Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 6,
@@ -121,7 +123,7 @@ class ProductDetailScreen extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.bathtub_outlined,
                                 size: 28,
                               ),
@@ -129,10 +131,10 @@ class ProductDetailScreen extends StatelessWidget {
                             ],
                           )),
                       Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 6,
@@ -142,7 +144,7 @@ class ProductDetailScreen extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.person,
                                 size: 28,
                               ),
@@ -152,11 +154,11 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 18,
                   ),
                   Text(
                     product.description,
-                    style: TextStyle(color: Colors.black54, fontSize: 16),
+                    style: const TextStyle(color: Colors.black54, fontSize: 16),
                     textAlign: TextAlign.justify,
                   ),
                   const SizedBox(
@@ -164,14 +166,17 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text('Loại: '),
+                      const Text('Loại: '),
                       Text(
-                        product.types.replaceAll('[\'','').replaceAll('\']','').replaceAll('\'','').toLowerCase(),
+                        product.types
+                            .replaceAll('[', '')
+                            .replaceAll(']', '')
+                            .toLowerCase(),
                       )
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 18,
                   ),
                   Row(
                     children: [
@@ -248,16 +253,16 @@ class ProductDetailScreen extends StatelessWidget {
                       ))
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Container(
+                  SizedBox(
                     height: 70,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 25),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -266,12 +271,23 @@ class ProductDetailScreen extends StatelessWidget {
                               BoxShadow(color: Colors.black26, blurRadius: 4),
                             ],
                           ),
-                          child: Text(
-                            "Book Now",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w500),
+                          child: InkWell(
+                            child: const Text(
+                              "Đặt ngay",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            onTap: () {
+                              final cart = context.read<CartManager>();
+                              cart.addItem(product);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const FormScreen(),
+                                  ));
+                            },
                           ),
                         )
                       ],

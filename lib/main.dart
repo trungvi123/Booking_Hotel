@@ -72,12 +72,10 @@ class MyApp extends StatelessWidget {
                   ),
             routes: {
               CartScreen.routeName: (ctx) => CartScreen(),
-              // OrdersScreen.routeName: (ctx) => const OrdersScreen(),
               UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
               ProductFavoriteScreen.routeName: (ctx) =>
                   const ProductFavoriteScreen(),
-              FormScreen.routeName: (ctx) => FormScreen(),
-              // ShowImgScreen.routeName:(ctx) => ShowImgScreen()
+              FormScreen.routeName: (ctx) => const FormScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

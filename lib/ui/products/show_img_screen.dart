@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../widgets/post_app_bar.dart';
 
@@ -22,7 +20,7 @@ class ShowImgScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
        appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
             margin: const EdgeInsets.only(top: 50),
             child: PostAppBar(false, showFavoriteIcon)),

@@ -17,7 +17,7 @@ class CartScreen extends StatelessWidget {
     final cart = context.watch<CartManager>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
             margin: const EdgeInsets.only(top: 50),
             child: PostAppBar(false, showFavoriteIcon)),
@@ -71,6 +71,7 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
+                      
                       Navigator.push(
                           context,
                           MaterialPageRoute(

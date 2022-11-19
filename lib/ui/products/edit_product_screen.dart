@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +59,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   var _isLoading = false;
 
   final checkBoxList = [
-    CheckBoxModal(titleCheckBox: 'Sang trọng'),
+    CheckBoxModal(titleCheckBox: 'Sang trọng'), // mac dinh là false
     CheckBoxModal(titleCheckBox: 'Gia đình'),
     CheckBoxModal(titleCheckBox: 'Cặp đôi'),
     CheckBoxModal(titleCheckBox: 'Giá rẻ'),
@@ -139,7 +141,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (!isValid) {
       return;
     }
-    _editedProduct.copyWith(types: typeSelect.toString());
+    _editedProduct= _editedProduct.copyWith(types: typeSelect.toString());
 
     _editForm.currentState!.save();
 
@@ -171,10 +173,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
             margin: const EdgeInsets.only(top: 50),
-            child: PostAppBar(false, false)),
+            child: const PostAppBar(false, false)),
       ),
       body: _isLoading
           ? const Center(
@@ -186,14 +188,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 key: _editForm,
                 child: ListView(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       'Loại',
                       style: TextStyle(fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Column(
@@ -215,7 +217,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 ),
                                 Text(
                                   item.titleCheckBox,
-                                  style: TextStyle(fontSize: 17),
+                                  style: const TextStyle(fontSize: 17),
                                 ),
                               ],
                             ))
@@ -231,12 +233,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     buildBedroomField(),
                     buildBathroomField(),
                     buildQuantityPersonField(),
-                    
                   ],
                 ),
               ),
             ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 80,
         child: IconButton(
           icon: const Icon(Icons.save),
@@ -383,7 +384,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Widget buildProductPreview(int number) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _imageUrlControllerText;
+    // ignore: no_leading_underscores_for_local_identifiers
     final _imageUrlControllerTextIsEmpty;
     if (number == 1) {
       _imageUrlControllerText = _imageUrlController.text;

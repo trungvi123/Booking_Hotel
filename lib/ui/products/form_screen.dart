@@ -11,6 +11,8 @@ import '../widgets/post_app_bar.dart';
 class FormScreen extends StatefulWidget {
   static const routeName = '/form-info';
 
+  const FormScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return FormScreenState();
@@ -29,7 +31,7 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildName() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Tên'),
+      decoration: const InputDecoration(labelText: 'Tên'),
       maxLength: 20,
       validator: (value) {
         if (value!.isEmpty) {
@@ -46,7 +48,7 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildEmail() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Email'),
+      decoration: const InputDecoration(labelText: 'Email'),
       validator: (value) {
         if (value!.isEmpty) {
           return 'Vui lòng điền email của bạn!';
@@ -69,7 +71,7 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Số điện thoại'),
+      decoration: const InputDecoration(labelText: 'Số điện thoại'),
       keyboardType: TextInputType.phone,
       validator: (value) {
         if (value!.isEmpty) {
@@ -88,7 +90,7 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildNote() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Ghi chú'),
+      decoration: const InputDecoration(labelText: 'Ghi chú'),
       validator: (value) {
         return null;
       },
@@ -103,21 +105,22 @@ class FormScreenState extends State<FormScreen> {
   Widget build(BuildContext context) {
     final products = context.watch<CartManager>().products;
     var prodName = [];
-
+    final cart = context.watch<CartManager>();
     for (var element in products) {
       prodName.add(element.title);
-    };
+    }
+    
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
+        preferredSize: const Size.fromHeight(150),
         child: Container(
             margin: const EdgeInsets.only(top: 50),
             child: PostAppBar(false, showFavoriteIcon)),
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(24),
+          margin: const EdgeInsets.all(24),
           child: Form(
             key: _formKey,
             child: Column(
@@ -157,7 +160,9 @@ class FormScreenState extends State<FormScreen> {
                           duration: Duration(seconds: 5),
                         ),
                       );
+                    
 
+                    cart.clear();
                     //Send to API
                     try {
                       final orderManager = context.read<OrderManager>();
