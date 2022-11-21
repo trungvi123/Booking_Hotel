@@ -16,7 +16,6 @@ class HomeAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           RichText(
-            
             text: const TextSpan(
               text: 'Mana',
               style: TextStyle(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/auth/auth_manager.dart';
 import 'package:myshop/ui/products/mix.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
+import 'package:myshop/ui/user/user_screen.dart';
 import 'package:provider/provider.dart';
 import '../cart/cart_screen.dart';
 import '../products/user_products_screen.dart';
@@ -32,10 +33,14 @@ class HomeBottomBar extends StatelessWidget {
                   context.read<PageIndexManager>().add(2),
                   Navigator.of(context).pushNamed(CartScreen.routeName)
                 }
-                else {
+                else if (value == 3){
                   context.read<PageIndexManager>().add(3),
               
                   Navigator.of(context).pushNamed(UserProductsScreen.routeName)
+                }else {
+                  context.read<PageIndexManager>().add(4),
+              
+                  Navigator.of(context).pushNamed(UserScreen.routeName)
                 }
             },
         items: [
@@ -55,7 +60,11 @@ class HomeBottomBar extends StatelessWidget {
             const Icon(
               Icons.post_add_rounded,
               size: 30,
-            ),
+          ),
+          const Icon(
+            Icons.person,
+            size: 30,
+          ),
         ]);
   }
 }
