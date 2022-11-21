@@ -5,7 +5,7 @@ export 'products/products_manager.dart';
 export 'products/edit_product_screen.dart';
 export 'products/mix.dart';
 
-export 'orders/orders_screen.dart';
+// export 'orders/orders_screen.dart';
 export 'orders/orders_manager.dart';
 
 export 'cart/cart_screen.dart';
@@ -16,3 +16,6 @@ export 'auth/auth_manager.dart';
 
 export 'splash_screen.dart';
 
+export 'products/form_screen.dart';
+export 'products/show_img_screen.dart';
+export 'user/user_screen.dart';

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:myshop/ui/products/form_screen.dart';
 import 'package:myshop/ui/products/product_favorite_screen.dart';
-import 'package:myshop/ui/products/show_img_screen.dart';
-import 'package:myshop/ui/user/user_screen.dart';
 
 import 'package:provider/provider.dart';
 

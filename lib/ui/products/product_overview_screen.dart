@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
-
-import '../shared/app_drawer.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_bottom_bar.dart';
 import './products_grid.dart';
