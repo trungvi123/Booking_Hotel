@@ -59,11 +59,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   var _isLoading = false;
 
   final checkBoxList = [
-    CheckBoxModal(titleCheckBox: 'Sang trọng'), // mac dinh là false
-    CheckBoxModal(titleCheckBox: 'Gia đình'),
-    CheckBoxModal(titleCheckBox: 'Cặp đôi'),
-    CheckBoxModal(titleCheckBox: 'Giá rẻ'),
-    CheckBoxModal(titleCheckBox: 'Gần biển'),
+    
   ];
 
   bool _isValidImageUrl(String value) {
@@ -119,6 +115,23 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _imageUrlController2.text = _editedProduct.imageUrl2;
     _imageUrlController3.text = _editedProduct.imageUrl3;
     _imageUrlController4.text = _editedProduct.imageUrl4;
+
+    checkBoxList.add(CheckBoxModal(
+        titleCheckBox: 'Sang trọng',
+        value: _editedProduct.types.contains('Sang trọng')));
+    checkBoxList.add(CheckBoxModal(
+        titleCheckBox: 'Gia đình',
+        value: _editedProduct.types.contains('Gia đình')));
+    checkBoxList.add(CheckBoxModal(
+        titleCheckBox: 'Cặp đôi',
+        value: _editedProduct.types.contains('Cặp đôi')));
+    checkBoxList.add(CheckBoxModal(
+        titleCheckBox: 'Giá rẻ',
+        value: _editedProduct.types.contains('Giá rẻ')));
+    checkBoxList.add(CheckBoxModal(
+        titleCheckBox: 'Gần biển',
+        value: _editedProduct.types.contains('Gần biển')));
+
     super.initState();
   }
 
@@ -141,7 +154,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (!isValid) {
       return;
     }
-    _editedProduct= _editedProduct.copyWith(types: typeSelect.toString());
+    _editedProduct = _editedProduct.copyWith(types: typeSelect.toString());
 
     _editForm.currentState!.save();
 
