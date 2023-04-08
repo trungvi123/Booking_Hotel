@@ -33,13 +33,20 @@ class HomeBottomBar extends StatelessWidget {
                   context.read<PageIndexManager>().add(2),
                   Navigator.of(context).pushNamed(CartScreen.routeName)
                 }
-                else if (value == 3){
+              else if (value == 3)
+                {
                   context.read<PageIndexManager>().add(3),
-              
-                  Navigator.of(context).pushNamed(UserProductsScreen.routeName)
-                }else {
+                  if (userId == 'dYh6xo9XwzRQN5ZlqEoCymqr5Hk1')
+                    {
+                      Navigator.of(context)
+                          .pushNamed(UserProductsScreen.routeName)
+                    }
+                  else
+                    {Navigator.of(context).pushNamed(UserScreen.routeName)}
+                }
+              else
+                {
                   context.read<PageIndexManager>().add(4),
-              
                   Navigator.of(context).pushNamed(UserScreen.routeName)
                 }
             },
@@ -60,7 +67,7 @@ class HomeBottomBar extends StatelessWidget {
             const Icon(
               Icons.post_add_rounded,
               size: 30,
-          ),
+            ),
           const Icon(
             Icons.person,
             size: 30,
